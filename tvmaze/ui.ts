@@ -1,14 +1,16 @@
 import { getEpisodesOfShow, searchShowsByTerm } from "./models"
 
-const $showsList = document.querySelector("#showsList");
-const $episodesList = document.querySelector("#episodesList");
-const $episodesArea = document.querySelector("#episodesArea");
-const $searchForm = document.querySelector("#searchForm");
-const $term = document.querySelector("#searchForm-term");
+import { tShowInfoAndScore, tShowInfo, tEpisodeInfo } from "./types";
+
+const $showsList = document.querySelector("#showsList") as HTMLElement;
+const $episodesList = document.querySelector("#episodesList") as HTMLUListElement;
+const $episodesArea = document.querySelector("#episodesArea") as HTMLElement;
+const $searchForm = document.querySelector("#searchForm") as HTMLFormElement;
+const $term = document.querySelector("#searchForm-term") as HTMLInputElement;
 
 /** Given list of shows, create markup for each and to DOM */
 
-function populateShows(shows) {
+function populateShows(shows: tShowInfo[]) : void {
   $showsList.innerHTML = "";
 
   for (const show of shows) {
@@ -57,7 +59,7 @@ function populateEpisodes(episodes) {
 
   for (const episode of episodes) {
     const $item = document.createElement("li");
-    $item.innerHTML = `    
+    $item.innerHTML = `
          ${episode.name}
          (season ${episode.season}, episode ${episode.number})
     `;
