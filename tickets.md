@@ -13,3 +13,15 @@
 ``` ts
 show: tShowInfo & {image: {medium: string, original: string} | undefined },
 ```
+5. What does `thisArg?` refer to in our .map signature? `this` context?
+``` ts
+thisArg?: any): {
+    id: number;
+    name: string;
+    summary: string;
+    image: string;
+}
+```
+6. Should we type all data returned from an API or only the data we're destructuring out of the resp?
+
+7. Are Element and HTMLElement viewed as the same thing by TS?
