@@ -6,7 +6,7 @@ function mock(method: (
   "all" | "head" | "get" | "post" | "put" | "patch" | "delete" | "options"),
               path: string,
               data: Record<string, any>,
-              status: number = 200)  {
+              status: number = 200): void  {
   mockServer.use(
     http[method](path, () =>
       HttpResponse.json(data, { status: status }),
