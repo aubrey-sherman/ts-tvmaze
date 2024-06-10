@@ -1,8 +1,17 @@
-type showInfo = {
+/** type of Object that holds show information */
+type tShowInfo = {
   id: number,
   name: string,
   summary: string,
   image: string,
-}
+};
 
-export type {showInfo}
+type tShowInfoAndScore = {
+  score: number,
+  show: tShowInfo & {image: {medium: string, original: string} | undefined },
+};
+
+export type {
+  tShowInfo,
+  tShowInfoAndScore,
+};
