@@ -8,7 +8,7 @@ const TVMAZE_API_URL = "https://api.tvmaze.com/";
  *    (if no image URL given by API, put in a default image URL)
  */
 
-async function searchShowsByTerm(term)  {
+async function searchShowsByTerm(term: string) : Promise<> {
   const response = await fetch(`${TVMAZE_API_URL}search/shows?q=${term}`);
   const data = await response.json();
 
