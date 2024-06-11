@@ -1,6 +1,6 @@
 import { getEpisodesOfShow, searchShowsByTerm } from "./models"
 
-import { tShowInfoAndScore, tShowInfo, tEpisodeInfo } from "./types";
+import { tShowInfo, tEpisodeInfo } from "./types";
 
 const $showsList = document.querySelector("#showsList") as HTMLElement;
 const $episodesList = document.querySelector("#episodesList") as HTMLUListElement;
@@ -38,7 +38,7 @@ function populateShows(shows: tShowInfo[]) : void {
  *    Hide episodes area (that only gets shown if they ask for episodes)
  */
 
-async function searchForShowAndDisplay() {
+async function searchForShowAndDisplay(): Promise<void> {
   const searchTerm = $term.value;
   const shows = await searchShowsByTerm(searchTerm);
 
@@ -46,7 +46,7 @@ async function searchForShowAndDisplay() {
   populateShows(shows);
 }
 
-$searchForm.addEventListener("submit", async function (evt) {
+$searchForm.addEventListener("submit", async function (evt): Promise<void> {
   evt.preventDefault();
   await searchForShowAndDisplay();
 });
@@ -54,7 +54,7 @@ $searchForm.addEventListener("submit", async function (evt) {
 
 /** Given list of episodes, create markup for each and to DOM */
 
-function populateEpisodes(episodes) {
+function populateEpisodes(episodes: tEpisodeInfo[]): void {
   $episodesList.innerHTML = "";
 
   for (const episode of episodes) {
@@ -72,14 +72,14 @@ function populateEpisodes(episodes) {
 
 /** Handle click on episodes button: get episodes for show and display */
 
-async function getEpisodesAndDisplay(evt) {
-  const $clicked = evt.target;
+async function getEpisodesAndDisplay(evt: MouseEvent): Promise<void> {
+  const $clicked = evt.target as HTMLElement;
   if (!$clicked.matches(".Show-getEpisodes")) return;
 
   // here's one way to get the ID of the show: search "closest" ancestor
   // with the class of .Show (which is put onto the enclosing div, which
   // has the .data-show-id attribute).
-  const $closest = (evt.target).closest(".Show");
+  const $closest = (evt.target as HTMLElement).closest(".Show")!;
   const showId = Number($closest.getAttribute("data-show-id"));
   const episodes = await getEpisodesOfShow(showId);
   populateEpisodes(episodes);
