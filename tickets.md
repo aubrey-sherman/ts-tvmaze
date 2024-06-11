@@ -25,3 +25,8 @@ thisArg?: any): {
 6. Should we type all data returned from an API or only the data we're destructuring out of the resp?
 
 7. Are Element and HTMLElement viewed as the same thing by TS?
+
+8. Why would evt.target ever be null?
+`https://github.com/vuejs/vue/issues/7027`
+    -  you have no guarantee for the event to be valid in an asynchronous callback after it is used. So basically you have to save whatever you need, in your case, target, and use that instead of the event variable directly
+
