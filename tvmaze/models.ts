@@ -12,7 +12,7 @@ import { tShowInfoAndScore, tShowInfo, tEpisodeInfo } from "./types";
 
 async function searchShowsByTerm(term: string) : Promise<tShowInfo[]> {
   const response = await fetch(`${TVMAZE_API_URL}search/shows?q=${term}`);
-  const data = await response.json() as Promise<tShowInfoAndScore[]>;
+  const data: tShowInfoAndScore[] = await response.json();
 
   return data.map(result => {
     const show = result.show;
